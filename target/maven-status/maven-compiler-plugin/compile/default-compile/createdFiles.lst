@@ -1,0 +1,14 @@
+cat\gencat\canigo\model\Equipament.class
+cat\gencat\canigo\repository\CanigoRepositoryBasePackageScanMark.class
+cat\gencat\canigo\model\QEquipament.class
+cat\gencat\canigo\WebConfig.class
+cat\gencat\canigo\repository\impl\EquipamentRepositoryImpl.class
+cat\gencat\canigo\config\ConfigConstant.class
+cat\gencat\canigo\endpoints\EquipamentServiceController.class
+cat\gencat\canigo\service\EquipamentService.class
+cat\gencat\canigo\repository\EquipamentRepository.class
+cat\gencat\canigo\Application.class
+cat\gencat\canigo\config\SwaggerConfig.class
+cat\gencat\canigo\config\WebSecurityConfig.class
+cat\gencat\canigo\repository\EquipamentRepositoryCustom.class
+cat\gencat\canigo\config\AppConfig.class

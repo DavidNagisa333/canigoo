@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>cat.gencat.canigo</groupId>
+	<artifactId>canigo</artifactId>
+	<version>1.0.0</version>
+	<name>A canigo project</name>
+	<url>http://www.gencat.cat</url>
+	<packaging>war</packaging>
+  
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.4.2.RELEASE</version>
+	</parent>
+  
+  	<!-- Shared version number properties -->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<canigo.core.version>[3.2.0,3.3.0)</canigo.core.version>
+		<canigo.web.core.version>[1.2.0,1.3.0)</canigo.web.core.version>
+		<canigo.web.rs.version>[1.0.0,1.1.0)</canigo.web.rs.version>
+		<canigo.persistence.jpa>[1.2.0,1.3.0)</canigo.persistence.jpa>
+		<canigo.operation.logging>[1.1.0,1.2.0)</canigo.operation.logging>
+		<org.springframework.loaded.version>1.2.5.RELEASE</org.springframework.loaded.version>
+		<swagger2.version>2.4.0</swagger2.version>
+		<h2.version>1.4.193</h2.version>
+		<mysql.conector.version>5.1.40</mysql.conector.version>
+		<docker.maven.plugin.version>0.18.1</docker.maven.plugin.version>
+	</properties>
+	
+	<dependencies>
+		<!-- SPRING BOOT -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+			<scope>provided</scope>
+		</dependency>
+		
+		<!-- SWAGGER -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${swagger2.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${swagger2.version}</version>
+		</dependency>
+		
+		<!-- H2 DATABASE -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>${h2.version}</version>
+		</dependency>
+		
+		<!-- MYSQL CONNECTOR -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
+		<!--APACHE COMMONS LANG 3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.5</version>
+		</dependency>
+		
+		<!-- CANIGO DEPENDENCIES -->
+		<dependency>
+			<groupId>cat.gencat.ctti</groupId>
+			<artifactId>canigo.core</artifactId>
+			<version>${canigo.core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>cat.gencat.ctti</groupId>
+			<artifactId>canigo.web.core</artifactId>
+			<version>${canigo.web.core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>cat.gencat.ctti</groupId>
+			<artifactId>canigo.web.rs</artifactId>
+			<version>${canigo.web.rs.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>cat.gencat.ctti</groupId>
+			<artifactId>canigo.persistence.jpa</artifactId>
+			<version>${canigo.persistence.jpa}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-dbcp2</artifactId>
+					<groupId>org.apache.commons</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>cat.gencat.ctti</groupId>
+			<artifactId>canigo.operation.logging</artifactId>
+			<version>${canigo.operation.logging}</version>
+		</dependency>
+		
+		<!-- No se utilitza la 1.5 ya que solo coge los webjars que estén dentro de una carpeta lib -->
+    	<dependency>
+       		<groupId>org.webjars</groupId>
+       		<artifactId>webjars-servlet-2.x</artifactId>
+        	<version>1.1</version>
+    	</dependency>	
+	    
+	</dependencies>
+	
+	<build>
+		<finalName>canigo</finalName>
+		
+		<plugins>
+		<plugin>
+				<groupId>com.mysema.maven</groupId>
+				<artifactId>apt-maven-plugin</artifactId>
+				<version>1.1.3</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>process</goal>
+							<goal>test-process</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>target/generated-sources/java</outputDirectory>
+							<processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+				<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</jvmArguments>
+					<arguments>
+						<argument>--spring.profiles.active=dev</argument>
+					</arguments>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.springframework</groupId>
+						<artifactId>springloaded</artifactId>
+						<version>${org.springframework.loaded.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>${docker.maven.plugin.version}</version>
+				<configuration>
+					<dockerHost>http://localhost:2375</dockerHost>
+					<verbose>true</verbose>
+					<images>
+						<image>
+							<name>canigo/app</name>
+							<alias>app</alias>
+							<build>
+								<dockerFile>${project.basedir}/src/main/resources/docker/app/Dockerfile</dockerFile>
+								<assembly>
+									<descriptor>${project.basedir}/src/main/resources/docker/app/docker-assembly.xml</descriptor>
+								</assembly>
+							</build>
+							<run>
+								<ports>
+									<port>8080:8080</port>
+								</ports>
+							</run>
+						</image>
+
+					</images>
+				</configuration>
+			</plugin>
+
+			<!-- MAVEN ASSEMBLY PLUGIN -->
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<finalName>canigo.plantilla</finalName>
+					<descriptors>
+						<descriptor>src/main/resources/assemble/static.xml</descriptor>
+						<descriptor>src/main/resources/assemble/dynamic.xml</descriptor>
+						<descriptor>src/main/resources/assemble/docker-compose.xml</descriptor>
+					</descriptors>
+				</configuration>
+				<executions>
+					<execution>
+						<id>assembly-app</id>
+						<phase>package</phase>
+						<goals>
+							<goal>assembly</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	
+</project>

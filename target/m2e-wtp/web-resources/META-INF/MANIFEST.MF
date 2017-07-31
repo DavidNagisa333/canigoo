@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: A canigo project
+Implementation-Version: 1.0.0
+Built-By: dcaceres
+Implementation-Vendor-Id: cat.gencat.canigo
+Build-Jdk: 1.8.0_131
+Implementation-URL: http://www.gencat.cat
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+
